@@ -109,4 +109,12 @@ dataframe2 = tibble(
   )
 dataframe2
 ```
+take the mean of each variable in dataframe
+
+```{r}
+mean(dataframe$samp)
+mean(dataframe$gt10_logic)
+mean(dataframe$leg10_char)
+mean(dataframe$level_fact)
+```
 
