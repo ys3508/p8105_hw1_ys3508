@@ -18,8 +18,9 @@ data("penguins", package = "palmerpenguins")
 
 the data in this dataset, including names / values of important variables；
 
+Answer: the variables names are species, island, bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g, sex and year
 ```{r}
-tail(penguins) 
+penguins
 ```
 
 the size of the dataset (using nrow and ncol)
@@ -34,6 +35,10 @@ the mean flipper length
 ```{r}
 penguins %>%
   summarise(mean(flipper_length_mm, na.rm = TRUE))
+
+# or
+
+skimr::skim(penguins, flipper_length_mm)
 ```
 
 Make a scatterplot of flipper_length_mm (y) vs bill_length_mm (x); color points using the species variable (adding color = ... inside of aes in your ggplot code should help)
@@ -41,12 +46,42 @@ Make a scatterplot of flipper_length_mm (y) vs bill_length_mm (x); color points 
 scatterplot1 <- penguins %>%
 ggplot2:::ggplot(aes(x = bill_length_mm, y = flipper_length_mm, color = species)) + geom_point() +
 ggtitle("Scatterplot of flipper_length_mm (y) vs bill_length_mm (x)") +
-ylab("Flipper Length in mm")+
+ylab("Flipper Length in mm") +
 xlab("Bill Length in mm")
 
 scatterplot1
 ```
 
+Export scatterplot to project directory using ggsave.
+```{r}
+ggsave("scatterplot1.png")
+```
 
+# Problem 2
 
+a random sample of size 10 from a standard Normal distribution
+```{r}
+set.seed(1234) #set seed
+
+#random sample of size 10
+samp = rnorm(10)
+samp
+
+```
+
+create a data frame
+```{r}
+dataframe <- data.frame(samp)
+dataframe
+```
+
+create a logical vector indicating whether elements of the sample are greater than 0
+```{r}
+dataframe$gt10_logic <- dataframe$samp > 0
+dataframe
+```
+
+a character vector of length 10
+
+a factor vector of length 10, with 3 different factor “levels”
 
