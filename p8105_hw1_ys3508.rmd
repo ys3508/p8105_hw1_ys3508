@@ -91,8 +91,22 @@ dataframe
 
 a factor vector of length 10, with 3 different factor “levels”
 ```{r}
-dataframe$level_fact <- factor(c("low", "medium", "high", "low", "medium", "medium", "low","low","low","low"), levels=c("low", "medium", "high"))
+dataframe$level_fact <- factor(c("low", "medium", "high", "low", "medium", "medium", "low","low","low","low"), levels = c("low", "medium", "high"))
 dataframe
 
+```
+
+OR
+
+unsing titble to create the data frame for numeric/character/factor vector 
+
+```{r}
+dataframe2 = tibble(
+  samp,
+  gt10_logic = samp > 0,
+  leg10_char = c(length(10)),
+  level_fact = factor(c("low", "medium", "high", "low", "medium", "medium", "low","low","low","low"), levels = c("low", "medium", "high"))
+  )
+dataframe2
 ```
 
