@@ -18,9 +18,10 @@ data("penguins", package = "palmerpenguins")
 
 the data in this dataset, including names / values of important variables；
 
-Answer: the variables names are species, island, bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g, sex and year
+Answer: the variables names are species, island, bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g, sex and year. The impartant values are in the below table.
+
 ```{r}
-penguins
+summary(penguins)
 ```
 
 the size of the dataset (using nrow and ncol)
@@ -82,6 +83,16 @@ dataframe
 ```
 
 a character vector of length 10
+```{r}
+dataframe$leg10_char <- c(length(10))
+dataframe
+
+```
 
 a factor vector of length 10, with 3 different factor “levels”
+```{r}
+dataframe$level_fact <- factor(c("low", "medium", "high", "low", "medium", "medium", "low","low","low","low"), levels=c("low", "medium", "high"))
+dataframe
+
+```
 
