@@ -4,19 +4,14 @@ output:
   github_document
 ---
 # Problem 1
-## download the package
+## Load the package and dataset
 ```{r, echo = FALSE, message = FALSE}
 library(tidyverse) 
-```
-
-## load the penguins dataset
-```{r}
 data("penguins", package = "palmerpenguins")
 ```
 
-## description of the penguins dataset
 
-the data in this dataset, including names / values of important variables；
+## Description of the penguins dataset, including names / values of important variables；
 
 Answer: the variables names are species, island, bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g, sex and year. The impartant values are in the below table.
 
@@ -24,7 +19,7 @@ Answer: the variables names are species, island, bill_length_mm, bill_depth_mm, 
 summary(penguins)
 ```
 
-the size of the dataset (using nrow and ncol)
+## Size of the dataset (using nrow and ncol)
 ```{r}
 # Nrow/columns in penguins
 x = data.frame(penguins)
@@ -32,7 +27,7 @@ nrow(x)
 ncol(x)
 ```
 
-the mean flipper length
+## Mean flipper length
 ```{r}
 penguins %>%
   summarise(mean(flipper_length_mm, na.rm = TRUE))
@@ -42,7 +37,9 @@ penguins %>%
 skimr::skim(penguins, flipper_length_mm)
 ```
 
-Make a scatterplot of flipper_length_mm (y) vs bill_length_mm (x); color points using the species variable (adding color = ... inside of aes in your ggplot code should help)
+## Make a scatterplot of flipper_length_mm (y) vs bill_length_mm (x)
+
+
 ```{r}
 scatterplot1 <- penguins %>%
 ggplot2:::ggplot(aes(x = bill_length_mm, y = flipper_length_mm, color = species)) + geom_point() +
@@ -53,14 +50,14 @@ xlab("Bill Length in mm")
 scatterplot1
 ```
 
-Export scatterplot to project directory using ggsave.
+## Export scatterplot to project directory using ggsave.
 ```{r}
 ggsave("scatterplot1.png")
 ```
 
 # Problem 2
 
-a random sample of size 10 from a standard Normal distribution
+## Create a random sample of size 10 from a standard Normal distribution
 ```{r}
 set.seed(1234) #set seed
 
@@ -70,51 +67,80 @@ samp
 
 ```
 
-create a data frame
+## Create a data frame
 ```{r}
 dataframe <- data.frame(samp)
-dataframe
 ```
 
-create a logical vector indicating whether elements of the sample are greater than 0
+## Create a logical vector 
+indicating whether elements of the sample are greater than 0
 ```{r}
 dataframe$gt10_logic <- dataframe$samp > 0
-dataframe
+class(dataframe$gt10_logic)
 ```
 
-a character vector of length 10
+## Create a character vector 
+Create a character vector of length 10
 ```{r}
-dataframe$leg10_char <- c(length(10))
-dataframe
-
+dataframe$leg10_char <- vector("character", 10)
+class(dataframe$leg10_char)
 ```
 
-a factor vector of length 10, with 3 different factor “levels”
+## Create a factor vector 
+Create a factor vector of length 10, with 3 different factor “levels”
 ```{r}
 dataframe$level_fact <- factor(c("low", "medium", "high", "low", "medium", "medium", "low","low","low","low"), levels = c("low", "medium", "high"))
+class(dataframe$level_fact)
+
 dataframe
 
 ```
 
-OR
 
-unsing titble to create the data frame for numeric/character/factor vector 
+
+## OR: Unsing titble to create the data frame for numeric/character/factor vector 
 
 ```{r}
 dataframe2 = tibble(
   samp,
   gt10_logic = samp > 0,
-  leg10_char = c(length(10)),
+  leg10_char = vector("character", 10),
   level_fact = factor(c("low", "medium", "high", "low", "medium", "medium", "low","low","low","low"), levels = c("low", "medium", "high"))
   )
 dataframe2
-```
-take the mean of each variable in dataframe
 
+```
+## Take the mean of each variable in data frame
+
+Answer: Numeric / logical vector works, but the character/factor vector doesn’t.
 ```{r}
 mean(dataframe$samp)
 mean(dataframe$gt10_logic)
 mean(dataframe$leg10_char)
 mean(dataframe$level_fact)
+
+```
+
+## Convert variables from one type to another
+
+Answer: After being converted to numeric vectors, the factor/ charactor/logical vectors  all work. When trying to take the mean, I need to make sure the vectors are numeric or logical ectors.
+
+```{r, echo=T, results='hide'}
+#convert
+
+dataframe2$gt10_logic <- as.numeric(dataframe2$gt10_logic)
+dataframe2$leg10_char <- as.numeric(dataframe2$leg10_char)
+dataframe2$level_fact <- as.numeric(dataframe2$level_fact)
+
+#check
+class(dataframe2$gt10_logic)
+class(dataframe2$leg10_char)
+class(dataframe2$level_fact)
+
+#mean
+mean(dataframe2$gt10_logic)
+mean(dataframe2$leg10_char)
+mean(dataframe2$level_fact)
+
 ```
 
