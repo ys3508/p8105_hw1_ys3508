@@ -20,14 +20,18 @@ summary(penguins)
 ```
 
 ## Size of the dataset (using nrow and ncol)
+
+Answer: the dataset has 344 rows and 8 columns
 ```{r}
 # Nrow/columns in penguins
-x = data.frame(penguins)
-nrow(x)
-ncol(x)
+
+nrow(penguins)
+ncol(penguins)
 ```
 
 ## Mean flipper length
+
+Answer: The mean of flipper length is 200.9152mm.
 ```{r}
 penguins %>%
   summarise(mean(flipper_length_mm, na.rm = TRUE))
